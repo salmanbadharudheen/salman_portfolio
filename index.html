@@ -4,10 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salmanul Faris | Data Scientist & Python Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
-<bdy>
+<body>
     <header>
         <div class="container">
             <nav>
@@ -33,13 +36,17 @@
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1>Salmanul Faris</h1>
-                <h2>Data Scientist & Python Backend Developer</h2>
-                <p>Transforming data into actionable insights and building robust backend solutions</p>
+                <h1 class="typewriter" data-text="Salmanul Faris">Salmanul Faris</h1>
+                <h2 class="typewriter" data-text="Data Scientist & Python Backend Developer">Data Scientist & Python Backend Developer</h2>
+                <p class="typewriter" data-text="Transforming data into actionable insights and building robust backend solutions">Transforming data into actionable insights and building robust backend solutions</p>
                 <div class="hero-btns">
-                    <a href="#contact" class="btn">Contact Me</a>
-                    <a href="#projects" class="btn btn-outline">View Projects</a>
+                    <a href="#contact" class="btn typewriter" data-text="Contact Me">Contact Me</a>
+                    <a href="#projects" class="btn btn-outline typewriter" data-text="View Projects">View Projects</a>
                 </div>
+                <a href="#about" class="scroll-indicator" aria-label="Scroll down to About section">
+                    <span class="typewriter" data-text="Scroll Down">Scroll Down</span>
+                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </a>
             </div>
             <div class="hero-image">
                 <img src="assets/images/portfolio_.jpg" alt="Salmanul Faris" class="profile-img">
@@ -176,23 +183,31 @@
             <div class="education-grid">
                 <div class="education-card">
                     <div class="edu-date">2022 - 2024</div>
+                    <span class="edu-type">Master's Degree</span>
                     <h3>MCA Data Science</h3>
                     <h4>SRM University</h4>
+                    <p>Specialized in analytics, machine learning, and practical data science implementation.</p>
                 </div>
                 <div class="education-card">
                     <div class="edu-date">2017 - 2020</div>
+                    <span class="edu-type">Bachelor's Degree</span>
                     <h3>Bachelor of Computer Science</h3>
                     <h4>Calicut University</h4>
+                    <p>Built strong foundations in software development, algorithms, and database systems.</p>
                 </div>
                 <div class="education-card">
                     <div class="edu-date">2018 - 2021</div>
+                    <span class="edu-type">Bachelor's Degree</span>
                     <h3>BA Business Economics</h3>
                     <h4>Annamalai University</h4>
+                    <p>Developed business analysis, economic reasoning, and decision-making skills.</p>
                 </div>
                 <div class="education-card">
                     <div class="edu-date">04/2022 - 09/2023</div>
+                    <span class="edu-type">Professional Certification</span>
                     <h3>Google Data Analytics Certification</h3>
-                    <p>Completed extensive six month job-ready Google Career Certificate Training. Demonstrated hands on experience with data cleaning, data visualization, project management, interpreting and communicating data analytics finding</p>
+                    <h4>Google Career Certificate</h4>
+                    <p>Completed job-ready training in data cleaning, visualization, project management, and communicating analytical insights.</p>
                 </div>
             </div>
         </div>
@@ -229,7 +244,7 @@
                 </div>
                 
                 <div class="skills-category">
-                    <h3>Web Frameworks</h3>
+                    <h3>Web & Mobile Development</h3>
                     <div class="skill-items">
                         <div class="skill-item">
                             <span>Django</span>
@@ -238,6 +253,18 @@
                         <div class="skill-item">
                             <span>Flask</span>
                             <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <span>React Native</span>
+                            <div class="skill-bar"><div class="skill-level" style="width: 80%"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <span>WordPress</span>
+                            <div class="skill-bar"><div class="skill-level" style="width: 82%"></div></div>
+                        </div>
+                        <div class="skill-item">
+                            <span>Shopify</span>
+                            <div class="skill-bar"><div class="skill-level" style="width: 78%"></div></div>
                         </div>
                     </div>
                 </div>
@@ -349,7 +376,23 @@
                         <a href="https://tel-menu-app-5e46n.ondigitalocean.app/" target="_blank" class="btn btn-small">View Project</a>
                     </div>
                 </div>
-                
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="assets/images/stickon.png" alt="STIKCON AI Architecture & Interior Design">
+                    </div>
+                    <div class="project-content">
+                        <h3>STIKCON - AI Architecture & Interior Design</h3>
+                        <p>AI-enabled platform for architecture and interior designing services with intelligent design recommendations and project management.</p>
+                        <div class="project-tech">
+                            <span>Django</span>
+                            <span>Python</span>
+                            <span>AI/ML</span>
+                            <span>PostgreSQL</span>
+                        </div>
+                        <a href="https://stikcon.com/" target="_blank" class="btn btn-small">Live Project</a>
+                    </div>
+                </div>
                 
                 <div class="project-card">
                     <div class="project-image">
@@ -485,14 +528,14 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2023 Salmanul Faris. All rights reserved.</p>
+                <p>&copy;  Salmanul Faris. All rights reserved.</p>
                 <div class="declaration">
-                    <p>I hereby declare that all the information contained in this resume is in accordance with facts or truths to my knowledge.</p>
+                    <p>I hereby declare that all the information contained in this portfolio is true and accurate to the best of my knowledge.</p>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="scripts.js"></script>
 </body>
 </html>
