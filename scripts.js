@@ -110,7 +110,7 @@ const setupHeroTypewriter = () => {
 
     (async () => {
         for (const [idx, line] of lines.entries()) {
-            await typeLine(line, idx === 0 ? 34 : 20);
+            await typeLine(line, idx === 0 ? 50 : 35);
             await new Promise(resolve => setTimeout(resolve, 140));
         }
     })();
@@ -126,7 +126,6 @@ const revealSelectors = [
     '.timeline-item',
     '.education-card',
     '.skills-category',
-    '.project-card',
     '.contact-item',
     '.footer-content > div'
 ].join(', ');
@@ -146,9 +145,17 @@ const setupScrollReveal = () => {
         return;
     }
 
+    let aboutCardIndex = 0;
+
     revealElements.forEach((element, index) => {
         element.classList.add('reveal-on-scroll');
-        element.style.setProperty('--reveal-delay', `${(index % 4) * 90}ms`);
+
+        if (element.matches('.about-stats .stat-card')) {
+            element.style.setProperty('--reveal-delay', `${aboutCardIndex * 180}ms`);
+            aboutCardIndex += 1;
+        } else {
+            element.style.setProperty('--reveal-delay', `${(index % 4) * 90}ms`);
+        }
     });
 
     const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -265,3 +272,102 @@ const observer = new IntersectionObserver((entries) => {
 if (skillsSection) {
     observer.observe(skillsSection);
 }
+
+// ── Project Carousel ────────────────────────────────
+const setupProjectCarousel = () => {
+    const carousel = document.querySelector('.project-carousel');
+    if (!carousel) return;
+
+    const track = carousel.querySelector('.carousel-track');
+    const slides = Array.from(carousel.querySelectorAll('.project-slide'));
+    const prevBtn = carousel.querySelector('.carousel-prev');
+    const nextBtn = carousel.querySelector('.carousel-next');
+    const dotsContainer = carousel.querySelector('.carousel-dots');
+    let current = 0;
+    let autoTimer = null;
+
+    // Build dots
+    slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.classList.add('carousel-dot');
+        if (i === 0) dot.classList.add('active');
+        dot.setAttribute('aria-label', 'Go to project ' + (i + 1));
+        dot.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(dot);
+    });
+
+    const dots = Array.from(dotsContainer.querySelectorAll('.carousel-dot'));
+
+    const goTo = (index) => {
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+        current = index;
+
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+
+        slides.forEach((s, i) => {
+            s.classList.toggle('active', i === current);
+        });
+        dots.forEach((d, i) => {
+            d.classList.toggle('active', i === current);
+        });
+
+        resetAutoPlay();
+    };
+
+    const next = () => goTo(current + 1);
+    const prev = () => goTo(current - 1);
+
+    prevBtn.addEventListener('click', prev);
+    nextBtn.addEventListener('click', next);
+
+    // Keyboard support
+    carousel.setAttribute('tabindex', '0');
+    carousel.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
+    });
+
+    // Touch/swipe support
+    let touchStartX = 0;
+    let touchEndX = 0;
+    carousel.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    carousel.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        const diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+            diff > 0 ? next() : prev();
+        }
+    }, { passive: true });
+
+    // Auto-play
+    const startAutoPlay = () => {
+        autoTimer = setInterval(next, 4000);
+    };
+    const resetAutoPlay = () => {
+        clearInterval(autoTimer);
+        startAutoPlay();
+    };
+
+    // Pause on hover
+    carousel.addEventListener('mouseenter', () => clearInterval(autoTimer));
+    carousel.addEventListener('mouseleave', startAutoPlay);
+
+    // Animate-in when section scrolls into view
+    const carouselObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                carousel.classList.add('animate-in');
+                carouselObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+    carouselObserver.observe(carousel);
+
+    // Init first slide
+    goTo(0);
+};
+
+window.addEventListener('load', setupProjectCarousel);
