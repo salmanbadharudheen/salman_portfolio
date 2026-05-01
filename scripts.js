@@ -82,14 +82,18 @@ const setupHeroTypewriter = () => {
         line.textContent = '';
     });
 
-    const typeLine = (line, speed = 38) => new Promise(resolve => {
+    const typeLine = (line, speed = 22) => new Promise(resolve => {
         const text = line.getAttribute('data-text') || '';
         let index = 0;
         line.classList.add('is-typing');
 
         const tick = () => {
-            line.textContent += text.charAt(index);
-            index += 1;
+            // type 1-2 chars per tick for a snappier feel
+            const chunkSize = index < 4 ? 1 : (Math.random() < 0.35 ? 2 : 1);
+            for (let c = 0; c < chunkSize && index < text.length; c++) {
+                line.textContent += text.charAt(index);
+                index++;
+            }
 
             if (index < text.length) {
                 setTimeout(tick, speed);
@@ -105,13 +109,13 @@ const setupHeroTypewriter = () => {
             return;
         }
 
-        setTimeout(tick, 220);
+        setTimeout(tick, 80);
     });
 
     (async () => {
         for (const [idx, line] of lines.entries()) {
-            await typeLine(line, idx === 0 ? 50 : 35);
-            await new Promise(resolve => setTimeout(resolve, 140));
+            await typeLine(line, idx === 0 ? 28 : 20);
+            await new Promise(resolve => setTimeout(resolve, 60));
         }
     })();
 };
@@ -247,14 +251,13 @@ window.addEventListener('load', setup3DMotion);
 const animateSkills = () => {
     const skillLevels = document.querySelectorAll('.skill-level');
     
-    skillLevels.forEach(level => {
-        const width = level.style.width || window.getComputedStyle(level).width;
+    skillLevels.forEach((level, i) => {
         const targetWidth = level.style.width;
         level.style.width = '0';
         
         setTimeout(() => {
-            level.style.width = targetWidth || width;
-        }, 100);
+            level.style.width = targetWidth;
+        }, 120 + i * 55);
     });
 };
 
@@ -371,3 +374,65 @@ const setupProjectCarousel = () => {
 };
 
 window.addEventListener('load', setupProjectCarousel);
+
+// ── Dark / Light Mode Toggle ───────────────────────────
+const setupThemeToggle = () => {
+    const toggleBtn = document.getElementById('themeToggle');
+    const toggleBtnMobile = document.getElementById('themeToggleMobile');
+    if (!toggleBtn && !toggleBtnMobile) return;
+
+    const html = document.documentElement;
+
+    const applyTheme = (theme) => {
+        html.setAttribute('data-theme', theme);
+
+        // Sync both buttons
+        [toggleBtn, toggleBtnMobile].forEach(btn => {
+            if (!btn) return;
+            const icon = btn.querySelector('i');
+            const label = btn.querySelector('span');
+            if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            if (label) label.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+            btn.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+        });
+    };
+
+    const toggle = () => {
+        const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        applyTheme(next);
+        localStorage.setItem('theme', next);
+    };
+
+    const saved = localStorage.getItem('theme') || 'light';
+    applyTheme(saved);
+
+    if (toggleBtn) toggleBtn.addEventListener('click', toggle);
+    if (toggleBtnMobile) toggleBtnMobile.addEventListener('click', toggle);
+};
+
+window.addEventListener('load', setupThemeToggle);
+
+// ── Active Nav Link on Scroll ─────────────────────────
+const setupActiveNavLink = () => {
+    const sections = document.querySelectorAll('section[id]');
+    const links = document.querySelectorAll('.nav-links a[href^="#"]');
+    if (!sections.length || !links.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.getAttribute('id');
+                links.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+                });
+            }
+        });
+    }, {
+        threshold: 0.35,
+        rootMargin: '-74px 0px -55% 0px'
+    });
+
+    sections.forEach(s => observer.observe(s));
+};
+
+window.addEventListener('load', setupActiveNavLink);
