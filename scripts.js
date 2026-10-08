@@ -61,67 +61,6 @@ if (contactForm) {
     });
 }
 
-// Hero typewriter animation
-const setupHeroTypewriter = () => {
-    const lines = document.querySelectorAll('.hero .typewriter[data-text]');
-    if (!lines.length) {
-        return;
-    }
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) {
-        lines.forEach(line => {
-            const text = line.getAttribute('data-text') || line.textContent || '';
-            line.textContent = text;
-            line.classList.remove('is-typing');
-        });
-        return;
-    }
-
-    lines.forEach(line => {
-        line.textContent = '';
-    });
-
-    const typeLine = (line, speed = 22) => new Promise(resolve => {
-        const text = line.getAttribute('data-text') || '';
-        let index = 0;
-        line.classList.add('is-typing');
-
-        const tick = () => {
-            // type 1-2 chars per tick for a snappier feel
-            const chunkSize = index < 4 ? 1 : (Math.random() < 0.35 ? 2 : 1);
-            for (let c = 0; c < chunkSize && index < text.length; c++) {
-                line.textContent += text.charAt(index);
-                index++;
-            }
-
-            if (index < text.length) {
-                setTimeout(tick, speed);
-            } else {
-                line.classList.remove('is-typing');
-                resolve();
-            }
-        };
-
-        if (!text.length) {
-            line.classList.remove('is-typing');
-            resolve();
-            return;
-        }
-
-        setTimeout(tick, 80);
-    });
-
-    (async () => {
-        for (const [idx, line] of lines.entries()) {
-            await typeLine(line, idx === 0 ? 28 : 20);
-            await new Promise(resolve => setTimeout(resolve, 60));
-        }
-    })();
-};
-
-window.addEventListener('load', setupHeroTypewriter);
-
 // Animate elements while scrolling down the page
 const revealSelectors = [
     '.section-title',
@@ -181,37 +120,13 @@ const setupScrollReveal = () => {
 
 window.addEventListener('load', setupScrollReveal);
 
-// 3D motion effects (desktop/fine pointer only)
-const setup3DMotion = () => {
+// Card tilt effects (desktop/fine pointer only)
+const setupCardMotion = () => {
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
     if (prefersReducedMotion || !isFinePointer) {
         return;
-    }
-
-    const hero = document.querySelector('.hero');
-    const heroImage = document.querySelector('.hero-image');
-    const profileImg = document.querySelector('.profile-img');
-
-    if (heroImage && profileImg) {
-        const maxTilt = 10;
-
-        heroImage.addEventListener('mousemove', (event) => {
-            const rect = heroImage.getBoundingClientRect();
-            const offsetX = (event.clientX - rect.left) / rect.width;
-            const offsetY = (event.clientY - rect.top) / rect.height;
-            const rotateY = (offsetX - 0.5) * (maxTilt * 2);
-            const rotateX = (0.5 - offsetY) * (maxTilt * 2);
-
-            profileImg.style.setProperty('--hero-tilt-x', `${rotateX.toFixed(2)}deg`);
-            profileImg.style.setProperty('--hero-tilt-y', `${rotateY.toFixed(2)}deg`);
-        });
-
-        heroImage.addEventListener('mouseleave', () => {
-            profileImg.style.setProperty('--hero-tilt-x', '0deg');
-            profileImg.style.setProperty('--hero-tilt-y', '0deg');
-        });
     }
 
     const tiltCards = document.querySelectorAll('.stat-card, .education-card, .skills-category, .project-card, .contact-item');
@@ -234,18 +149,9 @@ const setup3DMotion = () => {
         });
     });
 
-    if (hero) {
-        const updateHeroDepth = () => {
-            const scrollValue = Math.min(window.scrollY, 640);
-            hero.style.setProperty('--hero-depth-shift', `${scrollValue}px`);
-        };
-
-        updateHeroDepth();
-        window.addEventListener('scroll', updateHeroDepth, { passive: true });
-    }
 };
 
-window.addEventListener('load', setup3DMotion);
+window.addEventListener('load', setupCardMotion);
 
 // Skill level animation
 const animateSkills = () => {
@@ -403,7 +309,7 @@ const setupThemeToggle = () => {
         localStorage.setItem('theme', next);
     };
 
-    const saved = localStorage.getItem('theme') || 'light';
+    const saved = localStorage.getItem('theme') || 'dark';
     applyTheme(saved);
 
     if (toggleBtn) toggleBtn.addEventListener('click', toggle);

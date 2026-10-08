@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salmanul Faris | Data Scientist & Python Developer</title>
+    <title>Salmanul Faris | Data Scientist & Software Developer</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Montserrat:wght@600;700;800&display=swap" rel="stylesheet">
@@ -24,15 +24,15 @@
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li class="nav-theme-row">
-                        <button class="theme-toggle theme-toggle-mobile" id="themeToggleMobile" aria-label="Switch to dark mode">
-                            <i class="fas fa-moon"></i>
-                            <span>Dark Mode</span>
+                        <button class="theme-toggle theme-toggle-mobile" id="themeToggleMobile" aria-label="Switch to light mode">
+                            <i class="fas fa-sun"></i>
+                            <span>Light Mode</span>
                         </button>
                     </li>
                 </ul>
                 <div class="nav-right">
-                    <button class="theme-toggle" id="themeToggle" aria-label="Switch to dark mode">
-                        <i class="fas fa-moon"></i>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode">
+                        <i class="fas fa-sun"></i>
                     </button>
                     <div class="burger">
                         <div class="line1"></div>
@@ -47,12 +47,12 @@
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 class="typewriter" data-text="Salmanul Faris">Salmanul Faris</h1>
-                <h2 class="typewriter" data-text="Data Scientist & Python Backend Developer">Data Scientist & Python Backend Developer</h2>
-                <p class="typewriter" data-text="Transforming data into actionable insights and building robust backend solutions">Transforming data into actionable insights and building robust backend solutions</p>
+                <h1>Salmanul Faris</h1>
+                <h2>Data Scientist &  Software Developer</h2>
+                <p>Transforming data into actionable insights and building robust backend solutions</p>
                 <div class="hero-btns">
-                    <a href="#contact" class="btn typewriter" data-text="Contact Me">Contact Me</a>
-                    <a href="#projects" class="btn btn-outline typewriter" data-text="View Projects">View Projects</a>
+                    <a href="#contact" class="btn">Contact Me</a>
+                    <a href="#projects" class="btn btn-outline">View Projects</a>
                 </div>
                 <a href="#about" class="scroll-indicator" aria-label="Scroll down to About section">
                     
@@ -60,9 +60,53 @@
                 </a>
             </div>
             <div class="hero-image">
-                <img src="assets/images/portfolio_.jpg" alt="Salmanul Faris" class="profile-img">
+                <div class="hero-tech" aria-hidden="true">
+                    <span class="tech-orbit tech-orbit-outer"></span>
+                    <span class="tech-orbit tech-orbit-inner"></span>
+                    <span class="tech-node tech-node-top"></span>
+                    <span class="tech-node tech-node-right"></span>
+                    <span class="tech-node tech-node-bottom"></span>
+                </div>
+                <img src="assets/images/portfolio.png" alt="Salmanul Faris" class="profile-img">
             </div>
         </div>
+        <a class="hero-robot" href="#contact" aria-label="Get in touch">
+            <span class="robot-speech" aria-hidden="true">Hi!</span>
+            <svg class="robot-illustration" viewBox="0 0 90 104" fill="none" aria-hidden="true">
+                <defs>
+                    <linearGradient id="robot-shell" x1="17" y1="29" x2="63" y2="81" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#243b4b"/>
+                        <stop offset="1" stop-color="#101e2a"/>
+                    </linearGradient>
+                    <linearGradient id="robot-visor" x1="20" y1="39" x2="60" y2="62" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#143944"/>
+                        <stop offset="1" stop-color="#102832"/>
+                    </linearGradient>
+                </defs>
+                <path d="M17 63L10 68L8 74" stroke="#2dd4bf" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="7" cy="76" r="3" fill="#243b4b" stroke="#2dd4bf" stroke-width="2"/>
+                <path d="M40 17V10" stroke="#2dd4bf" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="40" cy="7" r="4" fill="#2dd4bf"/>
+                <circle cx="40" cy="7" r="2" fill="#d6fff7"/>
+                <path d="M14 42C14 32.059 22.059 24 32 24H48C57.941 24 66 32.059 66 42V51C66 60.941 57.941 69 48 69H32C22.059 69 14 60.941 14 51V42Z" fill="url(#robot-shell)" stroke="#2dd4bf" stroke-width="2.5"/>
+                <rect x="20" y="36" width="40" height="23" rx="9" fill="url(#robot-visor)" stroke="#476c78" stroke-width="1"/>
+                <circle cx="31" cy="47.5" r="3" fill="#69f6e2"/>
+                <circle cx="49" cy="47.5" r="3" fill="#69f6e2"/>
+                <g transform="translate(58 49)">
+                    <g class="robot-wave-arm">
+                        <path d="M0 0C5 2 9 5 12 9" stroke="#2dd4bf" stroke-width="3.5" stroke-linecap="round"/>
+                        <path d="M9 10C7 8 6 6 6 3V-1C6-4 10-4 10-1V3L12-7C13-10 17-9 16-6L15 2L19-8C20-11 24-9 23-6L20 3L24-2C26-5 30-2 28 1L24 10C22 15 17 17 12 15L10 14C7 13 6 12 9 10Z" fill="#243b4b" stroke="#2dd4bf" stroke-width="2" stroke-linejoin="round"/>
+                        <path d="M11 12C15 14 19 13 21 10" stroke="#476c78" stroke-width="1.5" stroke-linecap="round"/>
+                    </g>
+                </g>
+                <path d="M14 42H10M70 42H66" stroke="#2dd4bf" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M35 64H45" stroke="#fbbf24" stroke-width="2" stroke-linecap="round"/>
+                <path d="M29 71V76M51 71V76" stroke="#2dd4bf" stroke-width="2"/>
+                <path d="M20 104V91C20 84.373 25.373 79 32 79H48C54.627 79 60 84.373 60 91V104" fill="#1a2e3a" stroke="#2dd4bf" stroke-width="2.5" stroke-linejoin="round"/>
+                <path d="M34 85H46" stroke="#476c78" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="40" cy="92" r="2.5" fill="#fbbf24"/>
+            </svg>
+        </a>
     </section>
 
     <section id="about" class="about">
@@ -83,7 +127,7 @@
                         </div>
                         <div>
                             <span>Phone:</span>
-                            <p>+971 568156576</p>
+                            <p>+971 54 183 0378</p>
                         </div>
                         <div>
                             <span>Location:</span>
